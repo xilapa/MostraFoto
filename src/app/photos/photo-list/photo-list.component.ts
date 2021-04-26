@@ -12,6 +12,8 @@ export class PhotoListComponent implements OnInit {
 public title = 'MostraFoto';
 
 public photos: IPhoto[] =[];
+public photos_filtradas: IPhoto[] = [];
+public filtro_busca: string = "";
 
 constructor(private photoService: PhotoService,
   private activatedRoute: ActivatedRoute) { }
@@ -23,9 +25,17 @@ ngOnInit(): void {
   this.photoService
     .listFromUser(userName)
     .subscribe( {
-      next: photos => this.photos = photos,
+      next: photos => {
+        this.photos = photos;
+        this.photos_filtradas = photos;
+      },
       error: err => console.log(err)      
     });
+  }  
+
+
+  onKeyUp(event : any) : void {
+    this.filtro_busca = event.target.value;
   }
-  
 }
+

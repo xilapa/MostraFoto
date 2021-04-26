@@ -1,3 +1,4 @@
+<!-- Lista de Fotos -->
 <ol class="list-unstyled">
     <li *ngFor="let row of rows" class="row" >
         <div *ngFor="let photo of row" class="col-4">
@@ -5,3 +6,8 @@
         </div> 
     </li>
 </ol>
+
+<!-- Caso não haja fotos -->
+<div *ngIf="!photos.length" class="text-center text-muted">
+    Não há fotos com esta descrição
+</div>

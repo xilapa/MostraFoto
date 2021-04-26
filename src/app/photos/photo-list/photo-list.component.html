@@ -1,1 +1,7 @@
-<mf-photos [photos]="photos"></mf-photos>
+<div class="text-center mt-3 mb-3">
+    <form action="">
+        <input class="rounded" type="search" placeholder="pesquisar..." (keyup)="onKeyUp($event)" autofocus>
+    </form>
+</div>
+
+<mf-photos [photos]="photos | filterByDescription: filtro_busca"></mf-photos>
