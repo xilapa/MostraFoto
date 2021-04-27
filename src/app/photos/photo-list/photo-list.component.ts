@@ -1,41 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+
 import { IPhoto } from '../photo/photo';
-import { PhotoService } from '../photo/photo.service';
+
 
 @Component({
   templateUrl: './photo-list.component.html',
   styleUrls: ['./photo-list.component.css']
 })
-export class PhotoListComponent implements OnInit {
+export class PhotoListComponent implements OnInit, OnDestroy {
   
-public title = 'MostraFoto';
+  public title = 'MostraFoto';
+  public photos: IPhoto[] =[];
+  public photos_filtradas: IPhoto[] = [];
+  public filtro_busca: string = "";
+  public subjectFiltro: Subject<string> = new Subject<string>();
 
-public photos: IPhoto[] =[];
-public photos_filtradas: IPhoto[] = [];
-public filtro_busca: string = "";
-
-constructor(private photoService: PhotoService,
-  private activatedRoute: ActivatedRoute) { }
-
-ngOnInit(): void {
-
-  const userName:string = this.activatedRoute.snapshot.params.userName;
-
-  this.photoService
-    .listFromUser(userName)
-    .subscribe( {
-      next: photos => {
-        this.photos = photos;
-        this.photos_filtradas = photos;
-      },
-      error: err => console.log(err)      
-    });
+  constructor(private activatedRoute: ActivatedRoute) { }
+  
+  ngOnInit(): void {
+    this.photos = this.activatedRoute.snapshot.data.photos;
+    this.subjectFiltro.pipe(debounceTime(300)).subscribe(filtro => this.filtro_busca = filtro);
   }  
+  
+  ngOnDestroy(): void {
+    this.subjectFiltro.unsubscribe();
+  }
 
-
-  onKeyUp(event : any) : void {
-    this.filtro_busca = event.target.value;
+  onKeyUp(event : any) : string {
+  return event.target.value;
   }
 }
 

@@ -9,10 +9,10 @@ import { IPhoto } from "./photo";
 export class PhotoService{
     constructor(private http: HttpClient){ }
 
-    listFromUser(username: string) : Observable<any[]>
+    listFromUser(username: string) : Observable<IPhoto[]>
     {
         return this.http.get<IPhoto[]>(`http://localhost:3000/${username}/photos`).pipe(
-            //catchError(this.handleError)
+            catchError(this.handleError)
         );
 
     }
