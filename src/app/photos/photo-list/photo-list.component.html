@@ -5,3 +5,4 @@
 </div>
 
 <mf-photos [photos]="photos | filterByDescription: filtro_busca"></mf-photos>
+<mf-load-button [hasMore]='hasMore' (click)="onClick()"></mf-load-button>

@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
@@ -12,6 +12,15 @@ export class PhotoService{
     listFromUser(username: string) : Observable<IPhoto[]>
     {
         return this.http.get<IPhoto[]>(`http://localhost:3000/${username}/photos`).pipe(
+            catchError(this.handleError)
+        );
+
+    }
+
+    listFromUserPaginated(username: string, page: number) : Observable<IPhoto[]>
+    {
+        const params = new HttpParams().append('page',page.toString());
+        return this.http.get<IPhoto[]>(`http://localhost:3000/${username}/photos`, { params }).pipe(
             catchError(this.handleError)
         );
 
