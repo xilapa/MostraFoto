@@ -1,8 +1,4 @@
-<div class="text-center mt-3 mb-3">
-    <form action="">
-        <input class="rounded" type="search" placeholder="pesquisar..." (keyup)="subjectFiltro.next(onKeyUp($event))" autofocus>
-    </form>
-</div>
 
+<mf-search (filtro_busca_alterado)='filtro_busca=$event'></mf-search>
 <mf-photos [photos]="photos | filterByDescription: filtro_busca"></mf-photos>
 <mf-load-button [hasMore]='hasMore' (click)="onClick()"></mf-load-button>
