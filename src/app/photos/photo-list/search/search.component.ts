@@ -10,20 +10,17 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class SearchComponent implements OnInit, OnDestroy {
 
-  public subjectFiltro: Subject<string> = new Subject<string>();
+  public subjectFiltro: Subject<KeyboardEvent> = new Subject<KeyboardEvent>();
   @Output() filtro_busca_alterado : EventEmitter<string> = new EventEmitter<string>();
 
   constructor() { }
 
   ngOnInit(): void {
-    this.subjectFiltro.pipe(debounceTime(300)).subscribe(filtro => this.filtro_busca_alterado.emit(filtro));
+    this.subjectFiltro.pipe(debounceTime(300))
+    .subscribe(eventoInput => this.filtro_busca_alterado.emit((eventoInput.target as HTMLInputElement).value));
   }
 
   ngOnDestroy(): void {
     this.subjectFiltro.unsubscribe();
-  }
-
-  onKeyUp(event : any) : string {
-    return event.target.value;
   }
 }
