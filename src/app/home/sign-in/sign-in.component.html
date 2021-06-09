@@ -1,6 +1,6 @@
 <h4 class="text-center">Login</h4>
 
-<form [formGroup]="loginForm" class="form mt-4">
+<form [formGroup]="loginForm" class="form mt-4" (submit)='login()'>
 
     <div class="form-group">
         <input 
@@ -8,11 +8,11 @@
             class="form-control" 
             placeholder="user name" 
             autofocus>  
-        <small 
-            *ngIf="loginForm.get('userName')?.errors?.required;"
-            class="text-danger d-block mt-2">
-            User name is required!
-        </small>
+        <mf-vmessage 
+            *ngIf="loginForm.get('userName')?.errors?.required && !loginForm.get('userName')?.pristine"
+            message ='User name is required!'
+        >
+        </mf-vmessage>
     </div>
 
     <div class="form-group">
@@ -20,12 +20,12 @@
             formControlName = "password"
             type="password" 
             class="form-control" 
-            placeholder="password">     
-        <small
-            *ngIf ="loginForm.get('password')?.errors?.required;"
-            class="text-danger d-block mt-2">
-            Password is required!
-        </small>         
+            placeholder="password"> 
+        <mf-vmessage 
+            *ngIf="loginForm.get('password')?.errors?.required && !loginForm.get('password')?.pristine"
+            message ='Password is required!'
+        >
+        </mf-vmessage>              
     </div>
 
     <button 
