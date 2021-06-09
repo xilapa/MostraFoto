@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthService } from 'src/app/core/auth.service';
+import { AuthService } from 'src/app/core/auth/auth.service';
+import { PlatformDetectorService } from 'src/app/core/platform-detector/platform-detector.service';
 
 @Component({
   templateUrl: './sign-in.component.html',
@@ -12,8 +13,14 @@ export class SignInComponent implements OnInit, OnDestroy {
 
   public loginForm: FormGroup;
   public authenticateSubscription: Subscription;
+  @ViewChild('userNameInput') userNameInputElement: ElementRef<HTMLInputElement>;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private platformDetector: PlatformDetectorService
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -39,6 +46,8 @@ export class SignInComponent implements OnInit, OnDestroy {
         error: (err) => {
           console.log(err);
           this.loginForm.reset();
+          if (this.platformDetector.isBrowser())
+            this.userNameInputElement.nativeElement.focus();
         }
       })
   }
