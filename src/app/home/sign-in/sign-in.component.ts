@@ -39,12 +39,10 @@ export class SignInComponent implements OnInit, OnDestroy {
 
     this.authenticateSubscription = this.authService.authenticate(userName, password).subscribe(
       {
-        next: (data) => {
-          console.log(data)
+        next: () => {
           this.router.navigate(['user', userName])
         },
-        error: (err) => {
-          console.log(err);
+        error: () => {
           this.loginForm.reset();
           if (this.platformDetector.isBrowser())
             this.userNameInputElement.nativeElement.focus();
