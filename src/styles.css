@@ -4,4 +4,11 @@
 
 html {
     overflow-x: hidden;
+    min-width: 380px;
 }
+
+body {
+    margin-top: 56px;
+    
+}
+
