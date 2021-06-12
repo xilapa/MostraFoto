@@ -1,6 +1,7 @@
 [texto-tolltip] { /* Container for our tooltip */
   position: relative; 
   width: 200px;
+  cursor: pointer
  }
 
 [texto-tolltip]::before { 
