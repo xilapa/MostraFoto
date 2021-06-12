@@ -7,6 +7,8 @@ import { HeaderModule } from './core/header/header.module';
 import { ErrorsModule } from './errors/errors.module';
 import { HomeModule } from './home/home.module';
 import { PhotosModules } from './photos/photos.module';
+import { TestModule } from './test/test.module';
+
 
 
 
@@ -20,7 +22,8 @@ import { PhotosModules } from './photos/photos.module';
     PhotosModules,
     ErrorsModule,
     HomeModule,
-    HeaderModule
+    HeaderModule,
+    TestModule
   ],
   providers: [],
   bootstrap: [AppComponent]

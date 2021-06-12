@@ -1,0 +1,38 @@
+.tooltip-ex { /* Container for our tooltip */
+  position: relative; 
+  width: 200px;
+
+ }
+
+.tooltip-ex .tooltip-ex-text { /* This is for the tooltip text */
+visibility: hidden;
+display: inline-block;
+min-width: 250px;
+max-width: 250px;
+max-height: 300px;
+min-height: 30px;
+background-color: #8512d5;
+color: white;
+text-align: center;
+padding: 10px;
+border-radius: 10px; /* This defines tooltip text position */
+position: absolute;
+z-index: 1;
+
+box-sizing: border-box;
+opacity: 0;
+overflow: visible;
+bottom: 105%;    
+/* levar em conta o tamanho da borda e do pai*/
+left:  -25px;
+right: 0;
+/* margin-left: 2px; */
+text-align: center;
+transition: 0.6s opacity;
+
+}
+
+.tooltip-ex:hover .tooltip-ex-text { /* Makes tooltip text visible when text is hovered on */
+visibility: visible;
+opacity: 1;
+}
