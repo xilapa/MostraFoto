@@ -13,11 +13,10 @@ export class MeuTesteComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    for (let index = 0; index < 100; index++) {
+    for (let index = 0; index < 1500; index++) {
       this.arrayNumeros.push("Erro ".repeat(index));
       
     }
-    console.log(this.arrayNumeros)
   }
 
 
