@@ -1,38 +1,63 @@
-.tooltip-ex { /* Container for our tooltip */
+[texto-tolltip] { /* Container for our tooltip */
   position: relative; 
   width: 200px;
-
  }
 
-.tooltip-ex .tooltip-ex-text { /* This is for the tooltip text */
+[texto-tolltip]::before { 
+/* conteudo */
+content: attr(texto-tolltip);
+
+/* tooltip só aparece no hover */
+display: block;
 visibility: hidden;
-display: inline-block;
-min-width: 250px;
-max-width: 250px;
-max-height: 300px;
-min-height: 30px;
-background-color: #8512d5;
-color: white;
-text-align: center;
-padding: 10px;
-border-radius: 10px; /* This defines tooltip text position */
-position: absolute;
+
+/* tratar overflow */
+  /* usar somente quando as duas dimensoes forem limitadas */
+/* overflow: hidden; */
+  /* faz o texto se encaixar no width maximo, 
+  não possibilita ela crescer para baixo, por exemplo */
+/* white-space: nowrap;  */
+  /* como o texto sera cortado */
+/* text-overflow: ellipsis; */
+
+/* tamanho da tooltip */
+  /* min-width = max-width possibilita centralizar a tooltip com a referência */
+min-width: 150px; 
+max-width: 150px;
+
+  /* tamanho maximo que a tooltip pode crescer */
+/* max-height: 300px; */
+
+/* posicionamento */
+  /* tooltip não tem margin  */
+box-sizing: border-box;
+  /* ficar em cima do container pai */
+bottom: 105%; 
+  /* levar em conta o tamanho da borda e do pai para posicionar*/
+left:  25px;
+right: 0;
+  /* use margin left e right para ajuste fino */
+/* margin-left: 2px; */
+  /* aumenta para evitar outros textos se sobreporem a tooltip */
 z-index: 1;
 
-box-sizing: border-box;
-opacity: 0;
-overflow: visible;
-bottom: 105%;    
-/* levar em conta o tamanho da borda e do pai*/
-left:  -25px;
-right: 0;
-/* margin-left: 2px; */
-text-align: center;
-transition: 0.6s opacity;
+/* cores */
+background-color: #8512d5;
+color: black;
 
+/* alinhamento do texto interno da tooltip */
+text-align: center;
+/* top right bottom left */
+padding: 20px 5px 20px 5px;
+border-radius: 10px; 
+position: absolute;
+
+/* animação */
+opacity: 0;
+transition: 0.6s opacity;
 }
 
-.tooltip-ex:hover .tooltip-ex-text { /* Makes tooltip text visible when text is hovered on */
+[texto-tolltip]:hover::before { /* Makes tooltip text visible when text is hovered on */
 visibility: visible;
 opacity: 1;
 }

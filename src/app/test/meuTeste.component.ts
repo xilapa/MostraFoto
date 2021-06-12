@@ -1,5 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { createPopper } from '@popperjs/core';
+import { Component, OnInit } from '@angular/core';
 
 
 @Component({
@@ -7,20 +6,15 @@ import { createPopper } from '@popperjs/core';
   styleUrls: ['./meuTeste.component.css']
 
 })
-export class MeuTesteComponent implements OnInit,AfterViewInit {
+export class MeuTesteComponent implements OnInit {
 
   public arrayNumeros: string[] = [];
-  public popper?: any;
-  @ViewChild('texto') texto: ElementRef<HTMLElement>;
-  @ViewChild('tooltip') tooltip: ElementRef<HTMLElement>; 
+  
   constructor() { }
-  ngAfterViewInit(): void {
-    this.popper = createPopper(this.texto.nativeElement, this.tooltip.nativeElement , { placement: 'top'})
-  }
 
   ngOnInit(): void {
     for (let index = 0; index < 100; index++) {
-      this.arrayNumeros.push("Erro ");
+      this.arrayNumeros.push("Erro ".repeat(index));
       
     }
     console.log(this.arrayNumeros)
