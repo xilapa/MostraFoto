@@ -1,11 +1,14 @@
 <div class="container">
     <div>Teste Tooltip com css</div>
+    <div>TODO: colocar cor da seta junto com o fundo da tooltip</div>
     <div *ngFor="let item of arrayNumeros">        
-        <div style="margin-left:300px; width: 300px;"
-            posicao-tooltip="left" 
+        <div style="margin-left:300px; width: max-content; border: 1px solid black;"
+            posicao-tooltip="bottom" 
+            com-seta
             cor-texto-tolltip="preto" 
             cor-fundo-tooltip="purple" 
-            attr.texto-tolltip="{{item}}">
+            attr.texto-tolltip="{{item}}"
+            >
             Erro
         </div>
     </div>

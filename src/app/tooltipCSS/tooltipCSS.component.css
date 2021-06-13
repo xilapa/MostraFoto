@@ -52,7 +52,103 @@
   transition: 0.3s;
 }
 
-[texto-tolltip]:hover::before { 
+/* #region seta por data atributes */
+/* seta, é criada depois do elemento pai e deve ficar antes do efeito hover no css*/
+[posicao-tooltip="top"][com-seta]:after {
+  content: "";
+  position:absolute;
+  
+  /* ficar a esquerda do container pai */
+  /* é o tamanho da seta mais a distancia do container pai */
+  top: -15px;
+  /* posiciona no meio do eixo horizontal, translate (x,y) */
+  left: 50%;
+  transform: translate(-50%);
+ 
+  /* ficar junto do container da seta */
+  z-index: 1;
+
+  /* the arrow */
+  border:10px solid;
+  border-color: #fc00fc transparent transparent transparent;
+  
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+[posicao-tooltip="bottom"][com-seta]:after {
+  content: "";
+  position:absolute;
+  
+  /* ficar a esquerda do container pai */
+  /* é o tamanho da seta mais a distancia do container pai */
+  bottom: -15px;
+  /* posiciona no meio do eixo horizontal, translate (x,y) */
+  left: 50%;
+  transform: translate(-50%);
+ 
+  /* ficar junto do container da seta */
+  z-index: 1;
+
+  /* the arrow */
+  border:10px solid;
+  border-color: transparent transparent #fc00fc  transparent;
+  
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+[posicao-tooltip="left"][com-seta]:after {
+  content: "";
+  position:absolute;
+  
+  /* ficar a esquerda do container pai */
+  /* é o tamanho da seta mais a distancia do container pai */
+  left: calc(-10px - 5px);
+    /* posiciona no meio do eixo vertical, translate (x,y) */
+  top: 50%;
+  transform: translateY(-50%);
+ 
+  /* ficar junto com o container da seta*/
+  z-index: 1;
+
+  /* the arrow */
+  border:10px solid;
+  border-color: transparent transparent transparent #fc00fc;
+  
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+[posicao-tooltip="right"][com-seta]:after {
+  content: "";
+  position:absolute;
+  
+  /* ficar a esquerda do container pai */
+  /* é o tamanho da seta mais a distancia do container pai */
+  right: calc(-10px - 5px);
+    /* posiciona no meio do eixo vertical, translate (x,y) */
+  top: 50%;
+  transform: translateY(-50%);
+ 
+  /* ficar junto do container da seta */
+  z-index: 1;
+
+  /* the arrow */
+  border:10px solid;
+  border-color: transparent #fc00fc transparent transparent;
+  
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s;
+}
+/* #endregion */
+
+/* se não quiser a seta só remover o after */
+[texto-tolltip]:hover::before, [texto-tolltip]:hover::after { 
   visibility: visible;
   opacity: 1;
     /* aqui é definida a transição de entrada do mouse */
@@ -72,7 +168,8 @@
 /* para definir a posicao da tooltip */
 [posicao-tooltip="top"]::before{
     /* ficar em cima do container pai */
-  bottom: calc(100% + 5px); 
+    /* somar o tamanho da seta mais a distancia do container pai */
+  bottom: calc(100% + 15px); 
     /* posiciona no meio do eixo horizontal, translate (x,y) */
   left: 50%;
   transform: translate(-50%);
@@ -80,7 +177,8 @@
 
 [posicao-tooltip="bottom"]::before{
     /* ficar embaixo do container pai */
-  top: calc(100% + 5px);
+    /* somar o tamanho da seta mais a distancia do container pai */
+  top: calc(100% + 15px);
     /* posiciona no meio do eixo horizontal, translate (x,y) */
   left: 50%;
   transform: translate(-50%);
@@ -88,7 +186,8 @@
 
 [posicao-tooltip="left"]::before{
   /* ficar a esquerda do container pai */
-  right: calc(100% + 5px);
+  /* somar o tamanho da seta mais a distancia do container pai */
+  right: calc(100% + 15px);
     /* posiciona no meio do eixo vertical, translate (x,y) */
   top: 50%;
   transform: translate(0,-50%);
@@ -96,7 +195,8 @@
 
 [posicao-tooltip="right"]::before{
   /* ficar a direita do container pai */
-  left: calc(100% + 5px);
+  /* somar o tamanho da seta mais a distancia do container pai */
+  left: calc(100% + 15px);
     /* posiciona no meio do eixo vertical, translate (x,y) */
   top: 50%;
   transform: translate(0,-50%);
