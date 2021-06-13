@@ -1,0 +1,12 @@
+<div class="container">
+    <div>Teste Tooltip com css</div>
+    <div *ngFor="let item of arrayNumeros">        
+        <div style="margin-left:300px; width: 300px;"
+            posicao-tooltip="left" 
+            cor-texto-tolltip="preto" 
+            cor-fundo-tooltip="purple" 
+            attr.texto-tolltip="{{item}}">
+            Erro
+        </div>
+    </div>
+</div>

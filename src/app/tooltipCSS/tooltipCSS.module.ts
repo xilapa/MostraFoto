@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MeuTesteComponent } from './meuTeste.component';
+import { MeuTesteComponent } from './tooltipCSS.component';
 
 
 

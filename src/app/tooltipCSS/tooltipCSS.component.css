@@ -1,0 +1,105 @@
+:not([texto-tolltip=""])[texto-tolltip] { /* opções da classe que exibirá a tooltip, é opcional */
+  position: relative; 
+  cursor: pointer;
+}
+
+/* not garante que não seja exibida a tooltip com um atributo com texto vazio */
+:not([texto-tolltip=""])[texto-tolltip]::before { 
+  /* conteudo */
+  position: absolute;
+  content: attr(texto-tolltip);
+  font-size: 12px;
+  line-height: normal;
+
+  /* tooltip só aparece no hover */
+    /* display pode remover */
+  display: block;
+  visibility: hidden;
+
+  /* tratar overflow */
+    /* usar somente quando as duas dimensoes forem limitadas */
+  /* overflow: hidden; */
+    /* faz o texto se encaixar no width maximo, 
+    não possibilita ela crescer para baixo, por exemplo */
+  /* white-space: nowrap;  */
+    /* como o texto sera cortado */
+  /* text-overflow: ellipsis; */
+
+  /* tamanho da tooltip */
+      /* max content segue o tamanho do conteudo sem passar o tamanho maximo estipulado */
+  width: max-content;
+  max-width: 225px;
+  height: max-content;
+    /* permite que a tooltip cresca verticalmente */
+  max-height: none;
+  /* posicionamento */
+    /* tooltip não tem margin  */
+  box-sizing: border-box;
+
+    /* aumenta para evitar outros textos se sobreporem a tooltip */
+  z-index: 1;
+
+  /* alinhamento do texto interno da tooltip */
+  text-align: center;
+  /* top right bottom left */
+  padding: 20px 5px 20px 5px;
+  border-radius: 10px; 
+
+  /* animação */
+  opacity: 0;
+    /* primeiro é a propriedade e depois o tempo */
+    /* aqui é definida a transição de saida do mouse */
+  transition: 0.3s;
+}
+
+[texto-tolltip]:hover::before { 
+  visibility: visible;
+  opacity: 1;
+    /* aqui é definida a transição de entrada do mouse */
+  transition: 0.6s;
+}
+
+/* #region customização da tooltip por data-attributes */
+
+/* para definir um conjunto de cores */
+[cor-texto-tolltip="preto"]::before{
+  color: black;
+}
+[cor-fundo-tooltip="purple"]::before{
+  background-color: #fc00fc;
+}
+
+/* para definir a posicao da tooltip */
+[posicao-tooltip="top"]::before{
+    /* ficar em cima do container pai */
+  bottom: calc(100% + 5px); 
+    /* posiciona no meio do eixo horizontal, translate (x,y) */
+  left: 50%;
+  transform: translate(-50%);
+}
+
+[posicao-tooltip="bottom"]::before{
+    /* ficar embaixo do container pai */
+  top: calc(100% + 5px);
+    /* posiciona no meio do eixo horizontal, translate (x,y) */
+  left: 50%;
+  transform: translate(-50%);
+}
+
+[posicao-tooltip="left"]::before{
+  /* ficar a esquerda do container pai */
+  right: calc(100% + 5px);
+    /* posiciona no meio do eixo vertical, translate (x,y) */
+  top: 50%;
+  transform: translate(0,-50%);
+}
+
+[posicao-tooltip="right"]::before{
+  /* ficar a direita do container pai */
+  left: calc(100% + 5px);
+    /* posiciona no meio do eixo vertical, translate (x,y) */
+  top: 50%;
+  transform: translate(0,-50%);
+}
+
+/* #endregion */
