@@ -7,7 +7,7 @@
             <span class="mr-2 text-muted" style="cursor: pointer; font-size: small;" (click)="logout()">Logout</span>
         </div>
         <ng-template #userDeslogado>
-            <span>Please login!</span>
+            <a [routerLink]="['']">Please login!</a>
         </ng-template>
     </nav>
 </header>

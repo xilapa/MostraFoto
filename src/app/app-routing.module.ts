@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginPageGuard } from './core/guards/login-page.guard';
 
 import { NotfoundComponent } from './errors/notfound/notfound.component';
 import { SignInComponent } from './home/sign-in/sign-in.component';
@@ -9,7 +10,7 @@ import { PhotosFormComponent } from './photos/photos-form/photos-form.component'
 import { MeuTesteComponent } from './tooltipCSS/tooltipCSS.component';
 
 const routes: Routes = [
-  { path: '', component: SignInComponent },
+  { path: '', component: SignInComponent, canActivate: [LoginPageGuard] },
   { path: 'user/:userName', component: PhotoListComponent, resolve: { photos: PhotoListResolver } },
   { path: 'p/add', component: PhotosFormComponent },
   { path: 'test', component: MeuTesteComponent},
