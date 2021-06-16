@@ -40,7 +40,7 @@
         message ='User name is required!'
         ></mf-vmessage>
         <mf-vmessage 
-        *ngIf="signUpForm.get('userName')?.errors?.pattern && !signUpForm.get('userName')?.pristine"
+        *ngIf="signUpForm.get('userName')?.errors?.lowerCase && !signUpForm.get('userName')?.pristine"
         message ='User name must be lowercase!'
         ></mf-vmessage>
         <mf-vmessage 
