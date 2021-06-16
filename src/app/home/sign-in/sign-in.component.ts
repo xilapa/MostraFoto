@@ -30,7 +30,8 @@ export class SignInComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.authenticateSubscription.unsubscribe();
+    if (this.authenticateSubscription)
+      this.authenticateSubscription.unsubscribe();
   }
 
   public login() {
