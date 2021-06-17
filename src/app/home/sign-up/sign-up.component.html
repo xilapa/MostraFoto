@@ -51,6 +51,10 @@
         *ngIf="signUpForm.get('userName')?.errors?.maxlength && !signUpForm.get('userName')?.pristine"
         message ='Max length is 30 characters'
         ></mf-vmessage>
+        <mf-vmessage 
+        *ngIf="signUpForm.get('userName')?.errors?.userNameTaken && !signUpForm.get('userName')?.pristine"
+        message ='UserNameTaken'
+        ></mf-vmessage>
     </div>
 
     <!-- password -->
@@ -70,7 +74,7 @@
         ></mf-vmessage>
     </div>
 
-    <button class="btn btn-primary btn-block">Register</button>
+    <button class="btn btn-primary btn-block" [disabled] ="signUpForm.invalid ||signUpForm.pending">Register</button>
 
     <p>Already a user?<a [routerLink]="['']">Sign In!</a></p>
 </form>
