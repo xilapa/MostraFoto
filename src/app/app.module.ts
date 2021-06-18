@@ -18,12 +18,12 @@ import { TestModule } from './tooltipCSS/tooltipCSS.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     PhotosModules,
     ErrorsModule,
     HomeModule,
     HeaderModule,
-    TestModule
+    TestModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

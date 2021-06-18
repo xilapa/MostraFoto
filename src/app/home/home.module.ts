@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { VmessageModule } from '../shared/components/vmessage/vmessage.module';
-import { RouterModule } from '@angular/router';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HomeComponent } from './home.component';
+import { HomeRoutingModule } from './home-routing.module';
 
 
 
@@ -15,7 +15,7 @@ import { HomeComponent } from './home.component';
     CommonModule,
     ReactiveFormsModule,
     VmessageModule,
-    RouterModule
+    HomeRoutingModule
   ]
 })
 export class HomeModule { }
