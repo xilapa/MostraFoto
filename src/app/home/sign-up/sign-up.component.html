@@ -4,7 +4,7 @@
 
     <!-- email -->
     <div class="form-group">
-        <input formControlName="email" placeholder="email" class="form-control" autofocus >
+        <input #emailInput formControlName="email" placeholder="email" class="form-control" autofocus >
         <mf-vmessage 
         *ngIf="signUpForm.get('email')?.errors?.required && !signUpForm.get('email')?.pristine"
         message ='Email is required!'
