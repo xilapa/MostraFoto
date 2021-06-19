@@ -6,6 +6,7 @@ import { VmessageModule } from '../shared/components/vmessage/vmessage.module';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routing.module';
+import { SignUpService } from './sign-up/sign-up.service';
 
 
 
@@ -16,6 +17,7 @@ import { HomeRoutingModule } from './home-routing.module';
     ReactiveFormsModule,
     VmessageModule,
     HomeRoutingModule
-  ]
+  ],
+  providers: [SignUpService]
 })
 export class HomeModule { }

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 
 import { NotfoundComponent } from './errors/notfound/notfound.component';
@@ -10,7 +10,7 @@ import { MeuTesteComponent } from './tooltipCSS/tooltipCSS.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
-  // { path: 'home', component: HomeComponent},
+  { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule)},
   { path: 'user/:userName', component: PhotoListComponent, resolve: { photos: PhotoListResolver } },
   { path: 'p/add', component: PhotosFormComponent },
   { path: 'test', component: MeuTesteComponent},
@@ -18,7 +18,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true})],
+  imports: [RouterModule.forRoot(routes, { useHash: true,  preloadingStrategy: PreloadAllModules})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

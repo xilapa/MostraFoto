@@ -1,11 +1,12 @@
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { RequestInterceptorService } from './core/auth/request.interceptor';
 import { HeaderModule } from './core/header/header.module';
 import { ErrorsModule } from './errors/errors.module';
-import { HomeModule } from './home/home.module';
 import { PhotosModules } from './photos/photos.module';
 import { TestModule } from './tooltipCSS/tooltipCSS.module';
 
@@ -20,12 +21,15 @@ import { TestModule } from './tooltipCSS/tooltipCSS.module';
     BrowserModule,
     PhotosModules,
     ErrorsModule,
-    HomeModule,
     HeaderModule,
     TestModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: RequestInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

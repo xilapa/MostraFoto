@@ -6,9 +6,7 @@ import { debounceTime, first, map, switchMap } from 'rxjs/operators';
 
 const API_URL = "http://localhost:3000";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class UserNameTakenValidatorService {
 
   constructor(private http: HttpClient) { }

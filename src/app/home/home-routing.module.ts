@@ -10,7 +10,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 
 const homeRoutes: Routes = [
     {
-        path: 'home',
+        path: '',
         component: HomeComponent,
         canActivate: [LoginPageGuard],
         children:
