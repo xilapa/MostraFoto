@@ -26,6 +26,14 @@ export class PhotoService{
 
     }
 
+    upload(description: string, allowComments: boolean, image: File) : Observable<any> {
+        let formData = new FormData();
+        formData.append('description', description);
+        formData.append('allowComments', allowComments ? 'true' : 'false');
+        formData.append('imageFile', image);
+        return this.http.post(`http://localhost:3000/photos/upload`, formData);
+    }
+
     handleError(err: HttpErrorResponse){
         console.log(err.error.message);
         return throwError(err);
