@@ -97,10 +97,7 @@ export class PhotosFormComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!!this.imageFile) {
       this.imagemParaUploadElement.nativeElement.src = URL.createObjectURL(this.imageFile);
       this.imagemParaUploadElement.nativeElement.removeAttribute('hidden');
-    } else {
-      this.imagemParaUploadElement.nativeElement.src = '';
-      this.imagemParaUploadElement.nativeElement.setAttribute('hidden', '');
-    }
+    } 
   }
 
   listenToFormValuesChanges(): void {
