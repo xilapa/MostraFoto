@@ -66,7 +66,6 @@ export class PhotosFormComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private formBuilder: FormBuilder,
-    private platformDetectorService: PlatformDetectorService,
     private photoService: PhotoService,
     private router: Router,
     private stateService: StateService,
