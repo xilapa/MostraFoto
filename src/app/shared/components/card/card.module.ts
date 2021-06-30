@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CardComponent } from './card.component';
-import { DarkenOnHoverModule } from '../../directives/darken-on-hover.module';
+import { DarkenOnHoverModule } from '../../directives/darkenOnHover/darken-on-hover.module';
 
 
 
