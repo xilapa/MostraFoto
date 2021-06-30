@@ -6,7 +6,7 @@
                     <div class="row">
                         <div class="btn btn-primary" (click)="imageTouched=true">Choose an image</div>  
                         <div class="col px-0">
-                            <input class="form-control" type="text" disabled [placeholder]="imagePath">
+                            <input class="form-control" type="text" disabled [placeholder]="imagePathToDisplay">
                         </div>    
                     </div>  
             </label>
@@ -16,7 +16,7 @@
                 *ngIf="isImageInvalid()" message="please select a photo">
             </mf-vmessage>
             <div class="text-center">
-                <img #imagemParaUpload hidden class='img-thumbnail mb-3'>
+                <img *ngIf="imageURL" class='img-thumbnail mb-3' [src]="imageURL">
             </div>
 
         </div>

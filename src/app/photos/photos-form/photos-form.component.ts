@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { StateService } from 'src/app/core/state/state.service';
 import { PlatformDetectorService } from 'src/app/core/platform-detector/platform-detector.service';
 import { PhotoService } from '../photo/photo.service';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-photos-form',
@@ -17,6 +18,7 @@ export class PhotosFormComponent implements OnInit, AfterViewInit, OnDestroy {
   private PhotosFormComponentInitialValues: IPhotosFormComponent = {
     imageFile: null,
     imagePath: '',
+    imageURL: null,
     imageTouched: false,
     description: '',
     allowComments: true
@@ -29,10 +31,18 @@ export class PhotosFormComponent implements OnInit, AfterViewInit, OnDestroy {
   public get imageFile(): File {
     return (this.stateService.state.PhotosFormComponent as IPhotosFormComponent).imageFile;
   }
-  public set imagePath(text: string) {
+
+  public set imageURL(url: SafeUrl) {
+    (this.stateService.state.PhotosFormComponent as IPhotosFormComponent).imageURL = url;
+  }
+  public get imageURL(): SafeUrl {
+    return (this.stateService.state.PhotosFormComponent as IPhotosFormComponent).imageURL;
+  }
+
+  public set imagePathToDisplay(text: string) {
     (this.stateService.state.PhotosFormComponent as IPhotosFormComponent).imagePath = text;
   }
-  public get imagePath(): string {
+  public get imagePathToDisplay(): string {
     return (this.stateService.state.PhotosFormComponent as IPhotosFormComponent).imagePath;
   }
   public set imageTouched(value: boolean) {
@@ -53,14 +63,14 @@ export class PhotosFormComponent implements OnInit, AfterViewInit, OnDestroy {
   public get allowComments(): boolean {
     return (this.stateService.state.PhotosFormComponent as IPhotosFormComponent).allowComments;
   }
-  @ViewChild('imagemParaUpload') imagemParaUploadElement: ElementRef<HTMLImageElement>;
 
   constructor(
     private formBuilder: FormBuilder,
     private platformDetectorService: PlatformDetectorService,
     private photoService: PhotoService,
     private router: Router,
-    private stateService: StateService) {
+    private stateService: StateService,
+    private domSanitizer: DomSanitizer) {
     // checa se state do PhotosFormComponent foi iniciado e se foi pega os valores de lá para initial values
     if (!!this.stateService.state.PhotosFormComponent)
       this.PhotosFormComponentInitialValues = this.stateService.state.PhotosFormComponent;
@@ -77,7 +87,6 @@ export class PhotosFormComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
   ngAfterViewInit(): void {
-    this.setImageFile(this.imageFile);
     this.listenToFormValuesChanges();
   }
 
@@ -85,19 +94,11 @@ export class PhotosFormComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscriptions && this.subscriptions.unsubscribe();
   }
 
-  // recebe ou um evento do componente ou um arquivo do after view init
-  setImageFile(input: Event | File): void {
-    if (input instanceof Event && (input.target as HTMLInputElement).files.length > 0) {
-      this.imageFile = (input.target as HTMLInputElement).files[0];
-      this.imagePath = (input.target as HTMLInputElement).files[0].name;
-    }
-
-    if (input instanceof File) this.imageFile = input;
-
-    if (!!this.imageFile) {
-      this.imagemParaUploadElement.nativeElement.src = URL.createObjectURL(this.imageFile);
-      this.imagemParaUploadElement.nativeElement.removeAttribute('hidden');
-    } 
+  // recebe ou um evento do componente
+  setImageFile(input: Event): void {
+    this.imageFile = (input.target as HTMLInputElement).files[0];
+    this.imagePathToDisplay = (input.target as HTMLInputElement).files[0].name;
+    this.imageURL = this.domSanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.imageFile));
   }
 
   listenToFormValuesChanges(): void {
@@ -127,9 +128,9 @@ export class PhotosFormComponent implements OnInit, AfterViewInit, OnDestroy {
     })
 
     this.imageFile = null;
-    this.imagePath = '';
+    this.imagePathToDisplay = '';
     this.imageTouched = false;
-    this.setImageFile(this.imageFile);
+    this.imageURL = null;
   }
 
   isFormInvalid(): boolean {
@@ -145,6 +146,7 @@ export class PhotosFormComponent implements OnInit, AfterViewInit, OnDestroy {
 export interface IPhotosFormComponent {
   imageFile: File;
   imagePath: string;
+  imageURL: SafeUrl;
   imageTouched: boolean;
   description: string;
   allowComments: boolean;
