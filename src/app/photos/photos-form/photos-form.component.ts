@@ -1,10 +1,9 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { StateService } from 'src/app/core/state/state.service';
-import { PlatformDetectorService } from 'src/app/core/platform-detector/platform-detector.service';
 import { PhotoService } from '../photo/photo.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
@@ -95,9 +94,11 @@ export class PhotosFormComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // recebe ou um evento do componente
   setImageFile(input: Event): void {
-    this.imageFile = (input.target as HTMLInputElement).files[0];
-    this.imagePathToDisplay = (input.target as HTMLInputElement).files[0].name;
-    this.imageURL = this.domSanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.imageFile));
+    if ((input.target as HTMLInputElement).files.length > 0) {
+      this.imageFile = (input.target as HTMLInputElement).files[0];
+      this.imagePathToDisplay = (input.target as HTMLInputElement).files[0].name;
+      this.imageURL = this.domSanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.imageFile));
+    }
   }
 
   listenToFormValuesChanges(): void {
