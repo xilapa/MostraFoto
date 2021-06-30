@@ -46,3 +46,5 @@ testem.log
 Thumbs.db
 
 api/node_modules/
+api/uploads
+api/imgs
