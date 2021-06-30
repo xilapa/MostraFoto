@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { VmessageModule } from 'src/app/shared/components/vmessage/vmessage.module';
+import { AutoClickModule } from 'src/app/shared/directives/autoClick/auto-click.module';
 import { PhotosFormComponent } from './photos-form.component';
 
 @NgModule({
@@ -12,7 +13,8 @@ import { PhotosFormComponent } from './photos-form.component';
         CommonModule,
         ReactiveFormsModule,
         VmessageModule,
-        RouterModule
+        RouterModule,
+        AutoClickModule
     ]
 })
 export class PhotosFormModule{}

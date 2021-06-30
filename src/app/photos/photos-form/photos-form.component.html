@@ -4,7 +4,7 @@
             
             <label for="input-image" class="col mb-3">                
                     <div class="row">
-                        <div class="btn btn-primary" (click)="imageTouched=true">Choose an image</div>  
+                        <div appAutoClick class="btn btn-primary" (click)="imageTouched=true">Choose an image</div>  
                         <div class="col px-0">
                             <input class="form-control" type="text" disabled [placeholder]="imagePathToDisplay">
                         </div>    
