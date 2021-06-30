@@ -1,11 +1,24 @@
 <div class="container">
     <form [formGroup]="photoForm" class="row mt-5" (submit)="upload()">
-        <div class="col-md-6 text-center">
-            <input type="file" accept="image/*" (change)="setImageFile($event)" formControlName="image">
-            <mf-vmessage *ngIf="(photoForm.get('image').errors?.required) && (photoForm.get('image').touched)"
-                message="please select a photo">
+        <div class="col-md-6">
+            
+            <label for="input-image" class="col mb-3">                
+                    <div class="row">
+                        <div class="btn btn-primary" (click)="imageTouched=true">Choose an image</div>  
+                        <div class="col px-0">
+                            <input class="form-control" type="text" disabled [placeholder]="imagePath">
+                        </div>    
+                    </div>  
+            </label>
+            <input id="input-image" type="file" accept="image/*" (change)="setImageFile($event)" hidden>            
+
+            <mf-vmessage 
+                *ngIf="isImageInvalid()" message="please select a photo">
             </mf-vmessage>
-                <img #imagemParaUpload hidden class='img-thumbnail mt-2'>
+            <div class="text-center">
+                <img #imagemParaUpload hidden class='img-thumbnail mb-3'>
+            </div>
+
         </div>
 
 
@@ -13,12 +26,13 @@
             <div class="form-group">
                 <textarea class="form-control form-control-sm" placeholder="photo description"
                     formControlName="description"></textarea>
-                <mf-vmessage *ngIf="photoForm.get('description').errors?.required && photoForm.get('description').touched"
+                <mf-vmessage
+                    *ngIf="photoForm.get('description').errors?.required && photoForm.get('description').touched"
                     message="please insert a description">
                 </mf-vmessage>
                 <mf-vmessage *ngIf="photoForm.get('description').errors?.maxlength"
-                message="the description max length is 300 characters">
-            </mf-vmessage>
+                    message="the description max length is 300 characters">
+                </mf-vmessage>
             </div>
 
             <div class="form-group">
@@ -28,11 +42,11 @@
                 </label>
             </div>
 
-            <button type="submit" [disabled]="photoForm.invalid" class="btn btn-primary btn-block">
+            <button type="submit" [disabled]="isFormInvalid()" class="btn btn-primary btn-block">
                 Upload
             </button>
 
-            <a class="btn btn-secondary btn-block">Cancel</a>
+            <a class="btn btn-secondary btn-block" (click)="clearForm()">Cancel</a>
         </div>
     </form>
 </div>
