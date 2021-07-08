@@ -34,6 +34,10 @@ export class PhotoService{
         return this.http.post(`http://localhost:3000/photos/upload`, formData);
     }
 
+    getById(photoId: string): Observable<IPhoto> {
+        return this.http.get<IPhoto>(`http://localhost:3000/photos/${photoId}`);
+    }
+
     handleError(err: HttpErrorResponse){
         console.log(err.error.message);
         return throwError(err);

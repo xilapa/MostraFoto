@@ -9,12 +9,14 @@ import { PhotoListResolver } from './photos/photo-list/photo-list.resolver';
 import { PhotosFormComponent } from './photos/photos-form/photos-form.component';
 import { MeuTesteComponent } from './tooltipCSS/tooltipCSS.component';
 import { AuthGuard } from './core/guards/auth.guard';
+import { PhotoDetailsComponent } from './photos/photo-details/photo-details.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule)},
   { path: 'user/:userName', component: PhotoListComponent, resolve: { photos: PhotoListResolver } },
-  { path: 'p/add', component: PhotosFormComponent, canActivate:[AuthGuard] },
+  { path: 'p/add', component: PhotosFormComponent, canActivate: [AuthGuard] },
+  { path: 'p/:photoId', component: PhotoDetailsComponent},
   { path: 'test', component: MeuTesteComponent},
   { path: '**', component: NotfoundComponent }
 ];

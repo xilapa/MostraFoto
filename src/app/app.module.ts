@@ -8,6 +8,7 @@ import { RequestInterceptorService } from './core/auth/request.interceptor';
 import { FooterModule } from './core/footer/footer.module';
 import { HeaderModule } from './core/header/header.module';
 import { ErrorsModule } from './errors/errors.module';
+import { PhotoDetailsModule } from './photos/photo-details/photo-details.module';
 import { PhotosModules } from './photos/photos.module';
 import { TestModule } from './tooltipCSS/tooltipCSS.module';
 
@@ -25,7 +26,8 @@ import { TestModule } from './tooltipCSS/tooltipCSS.module';
     HeaderModule,
     FooterModule,
     TestModule,
-    AppRoutingModule
+    AppRoutingModule,
+    PhotoDetailsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
