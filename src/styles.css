@@ -12,3 +12,7 @@ body {
     
 }
 
+.break-word {
+    word-break: break-all;
+}
+

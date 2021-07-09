@@ -4,6 +4,7 @@ import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 
 import { IPhoto } from "./photo";
+import { IPhotoComment } from './photo-comment';
 
 @Injectable({ providedIn: 'root'})
 export class PhotoService{
@@ -34,8 +35,17 @@ export class PhotoService{
         return this.http.post(`http://localhost:3000/photos/upload`, formData);
     }
 
-    getById(photoId: string): Observable<IPhoto> {
+    getById(photoId: number): Observable<IPhoto> {
         return this.http.get<IPhoto>(`http://localhost:3000/photos/${photoId}`);
+    }
+
+    getComments(photoId: number): Observable<IPhotoComment[]>{
+        return this.http.get<IPhotoComment[]>(`http://localhost:3000/photos/${photoId}/comments`);
+    }
+
+
+    postComment(photoId: number, commentText: string): Observable<any> {
+        return this.http.post(`http://localhost:3000/photos/${photoId}/comments`, { commentText });
     }
 
     handleError(err: HttpErrorResponse){
