@@ -1,0 +1,5 @@
+.comment-list {
+    height: 50vh;
+    overflow-y: auto;
+    /* overflow auto não funciona muito bem com percentual, por isso se usou vh */
+}
