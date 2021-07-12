@@ -48,6 +48,10 @@ export class PhotoService{
         return this.http.post(`http://localhost:3000/photos/${photoId}/comments`, { commentText });
     }
 
+    removePhoto(photoId: number) : Observable<any>{
+        return this.http.delete(`http://localhost:3000/photos/${photoId}`);
+    }
+
     handleError(err: HttpErrorResponse){
         console.log(err.error.message);
         return throwError(err);

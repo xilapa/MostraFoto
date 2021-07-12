@@ -6,5 +6,5 @@ export interface IPhoto {
    allowComments: boolean;
    likes: number;
    comments: number;
-   userId: number;
+   userId: string;
 }
