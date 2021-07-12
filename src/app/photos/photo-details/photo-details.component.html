@@ -1,15 +1,18 @@
 <div class="bg-white border" *ngIf="(photo$ | async) as photo">
-    <div class="row">
-      <div class="col-lg-8">
-        <mf-photo [url]="photo.url" [description]="photo.description"></mf-photo>
-      </div>
-  
-      <div class="col-lg-4 p-4">
-        <small>
-          <p class="text-left break-word">{{photo.description}}</p>
-          <hr>
-        </small>
-        <mf-photo-comments [photoId]='photoId'></mf-photo-comments>
-      </div>
+  <div class="row">
+    <div class="col-lg-8">
+      <mf-photo [url]="photo.url" [description]="photo.description"></mf-photo>
+    </div>
+
+    <div class="col-lg-4 p-4">
+      <small>
+        <p class="text-left break-word">{{photo.description}}</p>
+        <hr>
+      </small>
+      <mf-photo-comments *ngIf="photo.allowComments; else warning" [photoId]='photoId'></mf-photo-comments>
+      <ng-template #warning>
+        <p>User has disabled comments for this photo</p>
+      </ng-template>
     </div>
   </div>
+</div>
