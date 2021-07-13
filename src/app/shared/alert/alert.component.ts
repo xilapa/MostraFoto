@@ -18,8 +18,12 @@ export class AlertComponent implements OnInit {
 
   ngOnInit(): void {
     let alertSubs = this.alertService.getAlert().subscribe(alert => {
-      this.alertList.push(alert);
-      setTimeout(() => this.alertList = this.alertList.filter(a => a != alert), this.timeout);
+      if (alert == null) {
+        this.alertList = [];
+      } else {
+        this.alertList.push(alert);
+        setTimeout(() => this.alertList = this.alertList.filter(a => a != alert), this.timeout);
+      }
     }
     )
     this.subscriptions.add(alertSubs);

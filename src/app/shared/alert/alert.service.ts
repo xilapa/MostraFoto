@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { Alert } from './Alert';
 
@@ -6,6 +7,16 @@ import { Alert } from './Alert';
   providedIn: 'root'
 })
 export class AlertService {
+
+  constructor(private router: Router) {
+    // se a rota mudar ele emite null e limpa a lista de alertas
+    this.router.events.subscribe(
+      eventoNavegacao => {
+        if (eventoNavegacao instanceof NavigationStart)
+          this.alertSubject.next(null);
+      }
+    )
+  }
 
   success(message: string) {
     this.alert('alert alert-success', message);
