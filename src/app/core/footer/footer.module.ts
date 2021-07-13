@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from './footer.component';
 import { RouterModule } from '@angular/router';
+import { AlertModule } from 'src/app/shared/alert/alert.module';
 
 
 
@@ -9,7 +10,8 @@ import { RouterModule } from '@angular/router';
   declarations: [FooterComponent],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    AlertModule
   ],
   exports: [FooterComponent]
 })

@@ -1,0 +1,9 @@
+.alertParent{
+    position: relative;
+}
+
+.alertPosition{
+    position: absolute;
+    right: 0;
+    bottom: 110%;
+}

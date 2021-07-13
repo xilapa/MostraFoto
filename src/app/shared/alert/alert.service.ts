@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { AlertType, Alert } from './Alert';
+import { Alert } from './Alert';
 
 @Injectable({
   providedIn: 'root'
@@ -8,27 +8,27 @@ import { AlertType, Alert } from './Alert';
 export class AlertService {
 
   success(message: string) {
-    this.alert(AlertType.SUCCESS, message, 'alert alert-success');
+    this.alert('alert alert-success', message);
   }
 
   warning(message: string) {
-    this.alert(AlertType.WARNING, message, 'alert alert-warning');
+    this.alert('alert alert-warning', message);
   }
 
   danger(message: string) {
-    this.alert(AlertType.DANGER, message, 'alert alert-danger');
+    this.alert('alert alert-danger', message);
   }
 
   info(message: string) {
-    this.alert(AlertType.INFO, message, 'alert alert-info');
+    this.alert('alert alert-info', message);
   }
   getAlert(): Observable<Alert> {
     return this.alertSubject.asObservable();
   }
   private alertSubject = new Subject<Alert>();
 
-  private alert(altertType: AlertType, message: string, alertClass: string): void {
-    this.alertSubject.next(new Alert(altertType, message, alertClass));
+  private alert(alertClass: string, message: string): void {
+    this.alertSubject.next(new Alert(alertClass, message));
   }
 
 }

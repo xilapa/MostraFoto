@@ -1,1 +1,7 @@
-<p>alert works!</p>
+<ng-container *ngFor="let alert of alertList">
+    <div class="alertParent">
+        <div class="alertPosition mb-0 mt-0 {{alert.bsClass}}">
+            {{ alert.message }}
+        </div>
+    </div>
+</ng-container>
