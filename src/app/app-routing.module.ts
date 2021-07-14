@@ -14,11 +14,11 @@ import { PhotoDetailsComponent } from './photos/photo-details/photo-details.comp
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule)},
-  { path: 'user/:userName', component: PhotoListComponent, resolve: { photos: PhotoListResolver } },
-  { path: 'p/add', component: PhotosFormComponent, canActivate: [AuthGuard] },
-  { path: 'p/:photoId', component: PhotoDetailsComponent},
-  { path: 'test', component: MeuTesteComponent },
-  { path: 'not-found', component: NotfoundComponent},
+  { path: 'user/:userName', component: PhotoListComponent, resolve: { photos: PhotoListResolver }, data: { title: "Timeline"} },
+  { path: 'p/add', component: PhotosFormComponent, canActivate: [AuthGuard], data: { title: "Photo Upload"} },
+  { path: 'p/:photoId', component: PhotoDetailsComponent, data: { title: "Photo Details"}},
+  { path: 'test', component: MeuTesteComponent , data: { title: "Test Component"}},
+  { path: 'not-found', component: NotfoundComponent, data: { title: "Not Found"}},
   { path: '**', redirectTo: 'not-found' }
 ];
 
