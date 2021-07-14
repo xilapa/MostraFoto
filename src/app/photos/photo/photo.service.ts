@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
@@ -27,12 +27,12 @@ export class PhotoService{
 
     }
 
-    upload(description: string, allowComments: boolean, image: File) : Observable<any> {
+    upload(description: string, allowComments: boolean, image: File) : Observable<HttpEvent<any>> {
         let formData = new FormData();
         formData.append('description', description);
         formData.append('allowComments', allowComments ? 'true' : 'false');
         formData.append('imageFile', image);
-        return this.http.post(`http://localhost:3000/photos/upload`, formData);
+        return this.http.post(`http://localhost:3000/photos/upload`, formData, { observe: 'events', reportProgress: true });
     }
 
     getById(photoId: number): Observable<IPhoto> {

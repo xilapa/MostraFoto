@@ -6,6 +6,9 @@ import { Subscription } from 'rxjs';
 import { StateService } from 'src/app/core/state/state.service';
 import { PhotoService } from '../photo/photo.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { HttpEvent, HttpEventType } from '@angular/common/http';
+import { AlertService } from 'src/app/shared/alert/alert.service';
+import { UserService } from 'src/app/core/user/user.service';
 
 @Component({
   selector: 'app-photos-form',
@@ -63,12 +66,17 @@ export class PhotosFormComponent implements OnInit, AfterViewInit, OnDestroy {
     return (this.stateService.state.PhotosFormComponent as IPhotosFormComponent).allowComments;
   }
 
+  public uploadProgress: any = 0;
+
   constructor(
     private formBuilder: FormBuilder,
     private photoService: PhotoService,
     private router: Router,
     private stateService: StateService,
-    private domSanitizer: DomSanitizer) {
+    private domSanitizer: DomSanitizer,
+    private alertService: AlertService,
+    private userService: UserService
+  ) {
     // checa se state do PhotosFormComponent foi iniciado e se foi pega os valores de lá para initial values
     if (!!this.stateService.state.PhotosFormComponent)
       this.PhotosFormComponentInitialValues = this.stateService.state.PhotosFormComponent;
@@ -92,7 +100,7 @@ export class PhotosFormComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscriptions && this.subscriptions.unsubscribe();
   }
 
-  // recebe ou um evento do componente
+  // recebe um evento do componente
   setImageFile(input: Event): void {
     if ((input.target as HTMLInputElement).files.length > 0) {
       this.imageFile = (input.target as HTMLInputElement).files[0];
@@ -116,9 +124,26 @@ export class PhotosFormComponent implements OnInit, AfterViewInit, OnDestroy {
     let values = this.photoForm.getRawValue();
     values.image = this.imageFile;
     const photoServiceUploadSubs = this.photoService.upload(values.description, values.allowComments, values.image)
-      .subscribe(() => this.router.navigate(['']));
+      .subscribe(
+        (event: HttpEvent<any>) => {
+          if (event.type == HttpEventType.UploadProgress)
+            this.uploadProgress = Math.round((100 * event.loaded) / event.total)
+        },
+        () => {
+          this.router.navigate(['/user', this.userService.getUserName()]);
+          this.alertService.danger("Upload Error");
+          this.clearForm();
+        },
+        () => {
+          this.router.navigate(['/user', this.userService.getUserName()]);
+          this.alertService.success("Upload complete");
+          this.clearForm();
+        });
+
+
+
     this.subscriptions.add(photoServiceUploadSubs);
-    this.clearForm();
+
   }
 
   clearForm(): void {

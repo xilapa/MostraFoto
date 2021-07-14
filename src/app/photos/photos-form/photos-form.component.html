@@ -41,7 +41,9 @@
                     <input type="checkbox" formControlName="allowComments">
                 </label>
             </div>
-
+            <div *ngIf="uploadProgress">
+                uploading {{uploadProgress}} %
+            </div>
             <button type="submit" [disabled]="isFormInvalid()" class="btn btn-primary btn-block">
                 Upload
             </button>
