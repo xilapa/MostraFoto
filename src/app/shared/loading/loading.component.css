@@ -1,0 +1,21 @@
+.loading {
+    margin: 0;
+    background: linear-gradient(270deg, #ff0000, #ffa500, #ffff00, #008000, #0000ff, #4b0082, #ee82ee);
+    /* define uma animação a ser utilizada */
+    animation: nomeQueQuiser 2s ease;
+    height: 0.2em;
+}
+
+/* o keyframes define como serão as propriedades do elemento ao longo da animação */
+@keyframes nomeQueQuiser {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+.stopped {
+    display: none;
+}
