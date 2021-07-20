@@ -1,0 +1,28 @@
+.menu-bar{
+    position: fixed;
+    height: 100%;
+    width: 80%;
+    max-width: 280px;
+    margin: 0;
+    padding: 1em;
+    z-index: 20;
+    background-color: aliceblue;
+    left: -100%;
+    transition: left 0.3s ease-in-out;
+    outline: none;
+}
+
+.active-menu .menu-bar {
+    left: 0;
+}
+
+.active-menu .overlay {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.4);
+    transition: 0.3s ease-in-out;
+    z-index: 15;
+}

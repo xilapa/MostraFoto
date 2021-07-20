@@ -1,8 +1,14 @@
+
 <header class="fixed-top min-size">
-    <nav class="navbar navbar-light bg-white">
-        <i (click)="menu.toggle()" class="fa fa-bars mr-2"></i>
+    <mf-menu #menu>
+        <ul>
+            <li>Menu</li>
+            <li>Menu2</li>
+        </ul>
+    </mf-menu>
+    <nav class="navbar navbar-light bg-white" >
+        <i (click)="menu.toggle()" class="fa fa-bars mr-2 no-otuline"></i>
         <a class="navbar-brand">ALURAPIC</a>
-        <mf-menu #menu></mf-menu>
         <div *ngIf = "(user$ | async) as user; else userDeslogado">
             <i class="fa fa-user-circle mr-2"></i>
             <span class="mr-2">{{user.name}}</span>

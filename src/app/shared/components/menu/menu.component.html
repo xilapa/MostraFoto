@@ -1,1 +1,11 @@
-<p>menu works!</p>
+<div 
+[ngClass]="{'active-menu': visible }">
+    <div class="menu-bar">
+        <i tabindex=0 
+        class="fa fa-window-close" (click)="toggle()" ></i>
+        <ng-content></ng-content>
+    </div>
+    <div  class="overlay" (click)="toggle()"
+    ></div>
+
+</div>
