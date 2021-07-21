@@ -27,13 +27,13 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.keyDownSubs = fromEvent(window, 'keydown')
-      .pipe(tap(e => {
-        if ((e as KeyboardEvent).key != "Enter") e.preventDefault()
-      }))
-      .pipe(filter(e => (e as KeyboardEvent).key == "Enter" && !(e.target as HTMLElement).classList.contains('rounded')))
-      .subscribe(() =>
-        this.menuComponent.toggle());
+    // this.keyDownSubs = fromEvent(window, 'keydown')
+    //   .pipe(tap(e => {
+    //     if ((e as KeyboardEvent).key == "Space") e.preventDefault()
+    //   }))
+    //   .pipe(filter(e => (e as KeyboardEvent).key == "Enter" && !(e.target as HTMLElement).classList.contains('rounded')))
+    //   .subscribe(() =>
+    //     this.menuComponent.toggle());
 
   }
 
