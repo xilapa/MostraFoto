@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { debounceTime, first, map, switchMap } from 'rxjs/operators';
 
@@ -15,7 +15,7 @@ export class UserNameTakenValidatorService {
     const checkUserNameTaken = (userName: string) : Observable<any> => 
        this.http.get(API_URL + '/user/exists/' + userName)
     
-    return (control: AbstractControl)=>{
+    return (control: AbstractControl) : ValidationErrors | null =>{
       return control.valueChanges
         .pipe(debounceTime(300))
         .pipe(switchMap(input => checkUserNameTaken(input)))
