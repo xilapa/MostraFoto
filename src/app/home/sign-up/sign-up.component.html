@@ -73,6 +73,10 @@
         *ngIf="signUpForm.get('password')?.errors?.maxlength && !signUpForm.get('password')?.pristine"
         message ='Max length is 14 characters'
         ></mf-vmessage>
+        <mf-vmessage 
+        *ngIf="signUpForm.errors?.usernamePassword"
+        message ='Username and password must be different'
+        ></mf-vmessage>
     </div>
 
     <button class="btn btn-primary btn-block" [disabled] ="signUpForm.invalid ||signUpForm.pending">Register</button>
