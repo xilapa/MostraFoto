@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { PlatformDetectorService } from 'src/app/core/platform-detector/platform-detector.service';
@@ -13,12 +13,15 @@ export class SignInComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public loginForm: FormGroup;
   public authenticateSubscription: Subscription;
+  public activatedRouteSubs: Subscription;
+  public routeParam: string = null;
   @ViewChild('userNameInput') userNameInputElement: ElementRef<HTMLInputElement>;
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
+    private activatedRoute : ActivatedRoute,
     private platformDetector: PlatformDetectorService
   ) { }
   
@@ -27,6 +30,9 @@ export class SignInComponent implements OnInit, OnDestroy, AfterViewInit {
       userName: ['', Validators.required],
       password: ['', Validators.required]
     });
+    this.activatedRouteSubs = this.activatedRoute.queryParamMap.subscribe(
+      params => this.routeParam = params.get('fromUrl')
+    )
   }
   
   ngAfterViewInit(): void {
@@ -37,6 +43,7 @@ export class SignInComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnDestroy(): void {
     if (this.authenticateSubscription)
       this.authenticateSubscription.unsubscribe();
+    this.activatedRouteSubs.unsubscribe();
   }
 
   public login() {
@@ -46,7 +53,10 @@ export class SignInComponent implements OnInit, OnDestroy, AfterViewInit {
     this.authenticateSubscription = this.authService.authenticate(userName, password).subscribe(
       {
         next: () => {
-          this.router.navigate(['user', userName])
+          if (this.routeParam == null)
+            this.router.navigate(['user', userName])
+          else
+            this.router.navigateByUrl(this.routeParam)
         },
         error: () => {
           this.loginForm.reset();
